@@ -5,11 +5,12 @@
     "android": "expo start --android",
     "ios": "expo start --ios",
     "eject": "expo eject",
-    "lint": "./node_modules/.bin/eslint"
+    "lint": "./node_modules/.bin/eslint **/*.{js,jsx} --quiet",
+    "eslint-check": "eslint --print-config . | eslint-config-prettier-check"
   },
   "dependencies": {
-    "eslint-config-airbnb-base": "^13.1.0",
     "expo": "^32.0.0",
+    "firebase": "^5.8.0",
     "lint": "^1.1.2",
     "react": "16.5.0",
     "react-native": "https://github.com/expo/react-native/archive/sdk-32.0.0.tar.gz",
@@ -19,11 +20,15 @@
   },
   "devDependencies": {
     "babel-preset-expo": "^5.0.0",
-    "eslint": "^5.12.0",
+    "eslint": "^5.12.1",
     "eslint-config-airbnb": "^17.1.0",
+    "eslint-config-airbnb-base": "^13.1.0",
+    "eslint-config-prettier": "^3.6.0",
     "eslint-plugin-import": "^2.14.0",
     "eslint-plugin-jsx-a11y": "^6.1.2",
-    "eslint-plugin-react": "^7.11.0"
+    "eslint-plugin-prettier": "^3.0.1",
+    "eslint-plugin-react": "^7.11.0",
+    "prettier": "^1.16.0"
   },
   "private": true
 }
