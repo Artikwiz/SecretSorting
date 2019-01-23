@@ -1,5 +1,5 @@
 {
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb", "prettier", "eslint:recommended"],
   "plugins": ["prettier"],
   "rules": {
     "prettier/prettier": ["error"],
@@ -8,5 +8,15 @@
     "no-use-before-define": ["error", { "functions": true, "classes": true, "variables": false }],
     "linebreak-style": 0,
     "generators": "never"
+  },
+  "globals": {
+    "shallow": true,
+    "render": true,
+    "mount": true
+  },
+  "env": {
+    "browser": true,
+    "jest": true,
+    "node": true
   }
 }

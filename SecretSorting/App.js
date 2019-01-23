@@ -1,21 +1,25 @@
-import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import { Provider, connect } from 'react-redux';
+import { reduxifyNavigator } from 'react-navigation-redux-helpers';
+import AppNavigator from './src/navigation/AppNavigator';
+import configureStore from './src/config/configureStore';
 
-export default class App extends React.Component {
+const App = reduxifyNavigator(AppNavigator, 'root');
+
+const mapStateToProps = state => ({
+  state: state.nav
+});
+
+const AppWithNavigationState = connect(mapStateToProps)(App);
+
+const store = configureStore();
+
+export default class Root extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
-      </View>
+      <Provider store={store}>
+        <AppWithNavigationState />
+      </Provider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
