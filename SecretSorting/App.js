@@ -2,9 +2,18 @@ import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
 import { reduxifyNavigator } from 'react-navigation-redux-helpers';
 import firebase from 'firebase';
+import {
+  API_KEY,
+  AUTH_DOMAIN,
+  DATABASE_URL,
+  PROJECT_ID,
+  STORAGE_BUCKET,
+  MESSAGING_SENDER_ID
+} from 'react-native-dotenv';
 
+import rootSagas from 'sagas';
 import AppNavigator from './src/navigation/AppNavigator';
-import configureStore from './src/config/configureStore';
+import configureStore, { sagaMiddleware } from './src/config/configureStore';
 
 const App = reduxifyNavigator(AppNavigator, 'root');
 
@@ -15,15 +24,16 @@ const mapStateToProps = state => ({
 const AppWithNavigationState = connect(mapStateToProps)(App);
 
 const store = configureStore();
+sagaMiddleware.run(rootSagas);
 
 // Initialize Firebase
 const config = {
-  apiKey: 'AIzaSyDkpC0wvm7jv9ElEvcmMehstO9Khvsg_PU',
-  authDomain: 'secretsortingapi.firebaseapp.com',
-  databaseURL: 'https://secretsortingapi.firebaseio.com',
-  projectId: 'secretsortingapi',
-  storageBucket: 'secretsortingapi.appspot.com',
-  messagingSenderId: '193031733979'
+  apiKey: API_KEY,
+  authDomain: AUTH_DOMAIN,
+  databaseURL: DATABASE_URL,
+  projectId: PROJECT_ID,
+  storageBucket: STORAGE_BUCKET,
+  messagingSenderId: MESSAGING_SENDER_ID
 };
 
 firebase.initializeApp(config);

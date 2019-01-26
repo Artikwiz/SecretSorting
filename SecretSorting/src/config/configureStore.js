@@ -3,7 +3,7 @@ import createSagaMiddleware from 'redux-saga';
 import logger from 'redux-logger';
 import { createReactNavigationReduxMiddleware } from 'react-navigation-redux-helpers';
 
-import appReducer from '../redux/reducers';
+import appReducer from 'reducers';
 
 export const sagaMiddleware = createSagaMiddleware();
 

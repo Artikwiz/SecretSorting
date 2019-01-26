@@ -6,9 +6,5 @@ npm-debug.*
 *.key
 *.mobileprovision
 
-/* Firebase Config File */
-./src/config.firebase.js
-
-
 .vscode/
 .expo/
