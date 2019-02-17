@@ -1,21 +1,33 @@
 import React, { PureComponent } from 'react';
-import { TextInput, KeyboardAvoidingView, Button } from 'react-native';
+import {
+  TouchableOpacity,
+  TextInput,
+  KeyboardAvoidingView,
+  Button,
+  View,
+  Text,
+  Image
+} from 'react-native';
 import { connect } from 'react-redux';
 import { sessionLogIn } from 'redux/actions/session';
 
+import styles from './styles';
+
 class Login extends PureComponent {
-  static navigationOptions = () => {
-    return {
-      header: () => null
-    };
+  static navigationOptions = {
+    header: () => null
   };
+
   constructor(props) {
     super(props);
     this.state = {
-      text: 'toto'
+      userEmail: '',
+      userPwd: ''
     };
+    this.inputs = {};
   }
 
+  //TODO: Virer cette fonction
   tryAuth() {
     const email = 'artikwiz@gmail.com';
     const password = 'artiksecret';
@@ -23,23 +35,62 @@ class Login extends PureComponent {
     handleLogIn(email, password);
   }
 
-  render() {
-    const { text } = this.state;
-    return (
-      <KeyboardAvoidingView>
-        <TextInput
-          style={{ height: 40, borderColor: 'gray', borderWidth: 1 }}
-          onChangeText={text => this.setState({ text })}
-          value={text}
-        />
+  focusNextField(id) {
+    this.inputs[id].focus();
+  }
 
-        <Button
-          onPress={() => this.tryAuth()}
-          title="Learn More"
-          color="#841584"
-          //   accessibilityLabel="Learn more about this purple button"
-        />
-        {/* <ActivityIndicator size="large" color="#0000ff" /> */}
+  render() {
+    const { userEmail, userPwd } = this.state;
+    const { navigation } = this.props;
+    return (
+      <KeyboardAvoidingView behavior="padding" style={styles.keyboardAView}>
+        <View style={styles.appTitleContainer}>
+          <Image
+            resizeMode="contain"
+            style={styles.logo}
+            source={require('../../../assets/secret-sorting-logo.png')}
+          />
+          {/* <Text style={styles.appTitle}>Secret Sorting</Text> */}
+        </View>
+        <View style={styles.formContainer}>
+          <TextInput
+            value={userEmail}
+            onChangeText={userEmail => this.setState({ userEmail })}
+            style={styles.textInput}
+            autoCorrect={false}
+            keyboardType="email-address"
+            returnKeyType="next"
+            placeholder="Email Address"
+            underlineColorAndroid="transparent"
+            ref={input => {
+              this.inputs['email'] = input;
+            }}
+            onSubmitEditing={() => {
+              this.focusNextField('password');
+            }}
+          />
+          <TextInput
+            value={userPwd}
+            onChangeText={userPwd => this.setState({ userPwd })}
+            style={styles.textInput}
+            autoCorrect={false}
+            secureTextEntry
+            returnKeyType="go"
+            placeholder="Password"
+            autoCapitalize="none"
+            ref={input => {
+              this.inputs['password'] = input;
+            }}
+          />
+          <Button
+            buttonStyle={styles.loginButton}
+            onPress={() => this.handleLogIn(userEmail, userPwd)}
+            title="LogIn"
+          />
+          <TouchableOpacity onPress={() => navigation.navigate('Register')}>
+            <Text style={styles.registerButton}>Create account</Text>
+          </TouchableOpacity>
+        </View>
       </KeyboardAvoidingView>
     );
   }

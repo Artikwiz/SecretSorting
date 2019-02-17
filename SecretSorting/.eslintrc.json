@@ -12,7 +12,8 @@
     "import/no-extraneous-dependencies": [
       "error",
       { "devDependencies": true, "optionalDependencies": false, "peerDependencies": false }
-    ]
+    ],
+    "react/prop-types": ["enabled", { "ignore": "ignore", "customValidators": "customValidator" }]
   },
   "settings": {
     "import/resolver": {

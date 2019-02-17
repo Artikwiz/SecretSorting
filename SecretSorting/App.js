@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { Provider, connect } from 'react-redux';
 import { reduxifyNavigator } from 'react-navigation-redux-helpers';
+import EStyleSheet from 'react-native-extended-stylesheet';
 import firebase from 'firebase';
 import {
   API_KEY,
@@ -37,6 +38,10 @@ const config = {
 };
 
 firebase.initializeApp(config);
+
+EStyleSheet.build({
+  // always call EStyleSheet.build() even if you don't use global variables!
+});
 
 export default class Root extends Component {
   render() {
