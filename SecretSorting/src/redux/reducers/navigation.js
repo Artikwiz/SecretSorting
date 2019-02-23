@@ -1,7 +1,7 @@
 import AppNavigator from 'navigation/AppNavigator';
 
 const initialState = AppNavigator.router.getStateForAction(
-  AppNavigator.router.getActionForPathAndParams('Login')
+  AppNavigator.router.getActionForPathAndParams('AuthLoading')
 );
 
 export default function navReducer(state = initialState, action) {

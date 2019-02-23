@@ -9,6 +9,7 @@ import {
   Image
 } from 'react-native';
 import { connect } from 'react-redux';
+import { NavigationActions, StackActions } from 'react-navigation';
 import { sessionLogIn } from 'redux/actions/session';
 
 import styles from './styles';
@@ -27,12 +28,16 @@ class Login extends PureComponent {
     this.inputs = {};
   }
 
-  //TODO: Virer cette fonction
-  tryAuth() {
-    const email = 'artikwiz@gmail.com';
-    const password = 'artiksecret';
-    const { handleLogIn } = this.props;
-    handleLogIn(email, password);
+  componentDidUpdate() {
+    const { isLoggedIn, navigation } = this.props;
+    if (isLoggedIn == true) {
+      navigation.dispatch(
+        StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: 'Home' })]
+        })
+      );
+    }
   }
 
   focusNextField(id) {
@@ -41,7 +46,7 @@ class Login extends PureComponent {
 
   render() {
     const { userEmail, userPwd } = this.state;
-    const { navigation } = this.props;
+    const { navigation, handleLogIn } = this.props;
     return (
       <KeyboardAvoidingView behavior="padding" style={styles.keyboardAView}>
         <View style={styles.appTitleContainer}>
@@ -50,7 +55,6 @@ class Login extends PureComponent {
             style={styles.logo}
             source={require('../../../assets/secret-sorting-logo.png')}
           />
-          {/* <Text style={styles.appTitle}>Secret Sorting</Text> */}
         </View>
         <View style={styles.formContainer}>
           <TextInput
@@ -62,6 +66,7 @@ class Login extends PureComponent {
             returnKeyType="next"
             placeholder="Email Address"
             underlineColorAndroid="transparent"
+            autoCapitalize="none"
             ref={input => {
               this.inputs['email'] = input;
             }}
@@ -84,7 +89,7 @@ class Login extends PureComponent {
           />
           <Button
             buttonStyle={styles.loginButton}
-            onPress={() => this.handleLogIn(userEmail, userPwd)}
+            onPress={() => handleLogIn(userEmail, userPwd)}
             title="LogIn"
           />
           <TouchableOpacity onPress={() => navigation.navigate('Register')}>
@@ -96,6 +101,12 @@ class Login extends PureComponent {
   }
 }
 
+const mapStateToProps = state => {
+  return {
+    isLoggedIn: state.session.isLoggedIn
+  };
+};
+
 const mapDispatchToProps = dispatch => {
   return {
     handleLogIn: (email, password) => {
@@ -105,6 +116,6 @@ const mapDispatchToProps = dispatch => {
 };
 
 export default connect(
-  null,
+  mapStateToProps,
   mapDispatchToProps
 )(Login);

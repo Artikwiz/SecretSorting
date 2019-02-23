@@ -16,6 +16,10 @@ import rootSagas from 'sagas';
 import AppNavigator from './src/navigation/AppNavigator';
 import configureStore, { sagaMiddleware } from './src/config/configureStore';
 
+if (__DEV__) {
+  import('./ReactotronConfig').then(() => console.log('Reactotron Configured'));
+}
+
 const App = reduxifyNavigator(AppNavigator, 'root');
 
 const mapStateToProps = state => ({

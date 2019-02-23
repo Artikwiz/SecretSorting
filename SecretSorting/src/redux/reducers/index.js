@@ -1,8 +1,10 @@
 import { combineReducers } from 'redux';
 import navReducer from './navigation';
+import session from './session';
 
 const appReducer = combineReducers({
-  nav: navReducer
+  nav: navReducer,
+  session
 });
 
 export default function rootReducer(state, action) {

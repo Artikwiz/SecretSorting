@@ -18,7 +18,7 @@
   "settings": {
     "import/resolver": {
       "node": {
-        "paths": ["src", "src/redux"],
+        "paths": ["src", "src/redux", "src/containers"],
         "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
     }

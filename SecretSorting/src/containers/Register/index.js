@@ -21,8 +21,9 @@ class Register extends PureComponent {
 
   onPressRegister() {
     const { userEmail, userPwd } = this.state;
-    const { handleRegister } = this.props;
+    const { handleRegister, navigation } = this.props;
     handleRegister(userEmail, userPwd);
+    navigation.goBack();
   }
 
   focusNextField(id) {
