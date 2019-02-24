@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import { View, Animated, Easing } from 'react-native';
 import { connect } from 'react-redux';
 import { NavigationActions, StackActions } from 'react-navigation';
+
 import { sessionLoadData } from 'actions/session';
 
 import styles from './styles';
@@ -19,9 +20,10 @@ class AuthLoading extends PureComponent {
   componentDidMount() {
     const { handleSessionLoadData } = this.props;
     this.spin();
-    setTimeout(function() {
-      handleSessionLoadData();
-    }, 2000);
+    // setTimeout(function() {
+    //   handleSessionLoadData();
+    // }, 1500);
+    handleSessionLoadData();
   }
 
   componentDidUpdate() {

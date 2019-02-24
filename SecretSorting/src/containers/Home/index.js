@@ -1,21 +1,45 @@
 import React, { PureComponent } from 'react';
-import { StyleSheet, Text, View } from 'react-native';
+import { Avatar } from 'react-native-elements';
+import { Text, View } from 'react-native';
+import ActionButton from 'react-native-action-button';
+import { Ionicons } from '@expo/vector-icons';
+import styles from './styles';
 
-export default class Home extends PureComponent {
+class Home extends PureComponent {
+  static navigationOptions = {
+    // <Image
+    headerRight: (
+      <Avatar
+        rounded
+        size="small"
+        source={require('../../../assets/face-2.jpg')}
+        containerStyle={{ marginRight: 10 }}
+      />
+    )
+  };
+
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app! PROUT</Text>
+        <Text>Open up App.js to start working on your app!</Text>
+        <ActionButton buttonColor="rgba(231,76,60,1)">
+          <ActionButton.Item
+            buttonColor="#9b59b6"
+            title="New Task"
+            onPress={() => console.log('notes tapped!')}
+          >
+            <Ionicons name="md-create" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+          <ActionButton.Item buttonColor="#3498db" title="Notifications" onPress={() => {}}>
+            <Ionicons name="md-notifications-off" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+          <ActionButton.Item buttonColor="#1abc9c" title="All Tasks" onPress={() => {}}>
+            <Ionicons name="md-done-all" style={styles.actionButtonIcon} />
+          </ActionButton.Item>
+        </ActionButton>
       </View>
     );
   }
 }
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center'
-  }
-});
+export default Home;
