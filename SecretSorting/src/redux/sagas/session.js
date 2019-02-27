@@ -102,8 +102,13 @@ const retrieveData = () =>
 function* fetchSessionLoadData() {
   try {
     const user = yield call(retrieveData);
+    var data = firebase.auth().currentUser;
+    console.log(data);
     yield put({ type: SESSION_LOAD_DATA_SUCCEED, user });
   } catch (e) {
+    var data = firebase.auth().currentUser;
+    console.log(data);
+
     yield put({ type: SESSION_LOAD_DATA_ERROR });
   }
 }

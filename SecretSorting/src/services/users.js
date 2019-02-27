@@ -1,6 +1,6 @@
 import firebase from 'firebase';
 
-export default function writeUserData(userId, name, email, imageUrl) {
+function writeUserData(userId, name, email, imageUrl) {
   //   firebase
   //     .database()
   //     .ref('users/' + userId)
@@ -28,4 +28,8 @@ export default function writeUserData(userId, name, email, imageUrl) {
     );
 }
 
-export default function addUserFriends()
+function addUserFriends(users[]) {
+  return;
+}
+
+export { writeUserData, addUserFriends };

@@ -30,6 +30,7 @@ export default function sessionReducer(state = defaultState, action) {
         ...state,
         token: action.user.stsTokenManager.accessToken,
         uid: action.user.uid,
+        user: action.user,
         isLoggedIn: true,
         error: null
       };

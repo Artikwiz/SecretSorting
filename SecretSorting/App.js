@@ -42,6 +42,7 @@ const config = {
 };
 
 firebase.initializeApp(config);
+firebase.auth().setPersistence(firebase.auth.Auth.Persistence.LOCAL);
 
 EStyleSheet.build({
   // always call EStyleSheet.build() even if you don't use global variables!
