@@ -6,17 +6,25 @@ import { Ionicons } from '@expo/vector-icons';
 import styles from './styles';
 
 class Home extends PureComponent {
-  static navigationOptions = {
-    // <Image
-    headerRight: (
-      <Avatar
-        rounded
-        size="small"
-        source={require('../../../assets/face-2.jpg')}
-        containerStyle={{ marginRight: 10 }}
-      />
-    )
+  static navigationOptions = ({ navigation }) => {
+    return {
+      headerRight: (
+        <Avatar
+          rounded
+          size="small"
+          source={require('../../../assets/face-2.jpg')}
+          containerStyle={{ marginRight: 10 }}
+          onPress={() => {
+            navigation.navigate('Profile');
+          }}
+        />
+      )
+    };
   };
+
+  constructor(props) {
+    super(props);
+  }
 
   render() {
     return (

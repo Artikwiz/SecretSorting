@@ -18,12 +18,21 @@ class AuthLoading extends PureComponent {
   }
 
   componentDidMount() {
-    const { handleSessionLoadData } = this.props;
+    const { handleSessionLoadData, navigation, isLoggedIn, isLoading } = this.props;
     this.spin();
-    // setTimeout(function() {
-    //   handleSessionLoadData();
-    // }, 1500);
+    setTimeout(function() {
+      handleSessionLoadData();
+    }, 1500);
     handleSessionLoadData();
+    if (!isLoading) {
+      const path = isLoggedIn === true ? 'Home' : 'Login';
+      navigation.dispatch(
+        StackActions.reset({
+          index: 0,
+          actions: [NavigationActions.navigate({ routeName: path })]
+        })
+      );
+    }
   }
 
   componentDidUpdate() {

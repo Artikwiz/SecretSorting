@@ -1,35 +1,57 @@
-import firebase from 'firebase';
+import { firestore } from 'firebase';
 
-function writeUserData(userId, name, email, imageUrl) {
-  //   firebase
-  //     .database()
-  //     .ref('users/' + userId)
-  //     .set({
-  //       username: name,
-  //       email: email,
-  //       profile_picture: imageUrl
-  //     });
-  firebase
-    .database()
-    .ref('users/' + userId)
-    .set(
-      {
-        username: name,
-        email: email,
-        profile_picture: imageUrl
-      },
-      function(error) {
-        if (error) {
-          // The write failed...
-        } else {
-          // Data saved successfully!
-        }
-      }
+const createUser = user => {
+  return new Promise(resolve => {
+    require('firebase/firestore');
+    const userRef = firestore()
+      .collection('users')
+      .doc(user.uid);
+    userRef.set({
+      email: user.email,
+      profile_picture: user.photoURL
+    });
+    // userRef.collection('friends').add({ poto: 'Hugo' });
+    resolve();
+  }).catch(function(error) {
+    console.error('Error writing document: ', error);
+  });
+};
+
+const updateUser = user => {
+  return new Promise(resolve => {
+    require('firebase/firestore');
+    const userRef = firestore()
+      .collection('users')
+      .doc(user.uid);
+    userRef.update(
+      //   {
+      //   email: user.email,
+      //   profile_picture: user.photoURL
+      // }
+      ...user
     );
-}
+    // userRef.collection('friends').add({ poto: 'Hugo' });
+    resolve();
+  }).catch(function(error) {
+    console.error('Error writing document: ', error);
+  });
+};
 
-function addUserFriends(users[]) {
-  return;
-}
+const addFriendsToUser = (user, friends) => {
+  return new Promise(resolve => {
+    require('firebase/firestore');
+    const userRef = firestore()
+      .collection('users')
+      .doc(user.uid);
+    friends.map(elem => {
+      userRef.update({
+        friends: firestore.FieldValue.arrayUnion(elem)
+      });
+    });
+    resolve();
+  }).catch(function(error) {
+    console.error('Error writing document: ', error);
+  });
+};
 
-export { writeUserData, addUserFriends };
+export { createUser, updateUser, addFriendsToUser };

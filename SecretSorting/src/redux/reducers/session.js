@@ -7,8 +7,7 @@ import {
 } from 'actions/session';
 
 const defaultState = {
-  token: '',
-  uid: undefined,
+  user: null,
   language: '',
   error: null,
   isLoggedIn: false,
@@ -22,14 +21,12 @@ export default function sessionReducer(state = defaultState, action) {
         ...state,
         isLoggedIn: false,
         token: '',
-        uid: undefined,
+        user: null,
         error: null
       };
     case SESSION_LOGIN_SUCCEED:
       return {
         ...state,
-        token: action.user.stsTokenManager.accessToken,
-        uid: action.user.uid,
         user: action.user,
         isLoggedIn: true,
         error: null
@@ -45,8 +42,7 @@ export default function sessionReducer(state = defaultState, action) {
         ...state,
         isLoading: false,
         isLoggedIn: true,
-        uid: action.user.uid,
-        token: action.user.token
+        user: action.user
       };
     case SESSION_LOAD_DATA_ERROR:
       return {
