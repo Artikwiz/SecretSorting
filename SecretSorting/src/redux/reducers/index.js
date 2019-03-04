@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux';
 import navReducer from './navigation';
 import session from './session';
+import entities from './entities';
 
 const appReducer = combineReducers({
   nav: navReducer,
-  session
+  session,
+  entities
 });
 
 export default function rootReducer(state, action) {

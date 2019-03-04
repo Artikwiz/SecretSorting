@@ -7,7 +7,7 @@
     "eject": "expo eject",
     "lint": "./node_modules/.bin/eslint **/*.{js,jsx} --quiet",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
-    "test": "./node_modules/.bin/jest",
+    "test": "./node_modules/.bin/jest --watch",
     "testWithCoverage": "jest --updateSnapshot --watch --coverage && open ./coverage/lcov-report/index.html"
   },
   "dependencies": {
@@ -47,7 +47,8 @@
     "redux-devtools": "^3.5.0"
   },
   "jest": {
-    "preset": "jest-expo"
+    "preset": "jest-expo",
+    "verbose": true
   },
   "private": true
 }
