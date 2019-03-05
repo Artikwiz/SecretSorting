@@ -7,7 +7,7 @@
     "eject": "expo eject",
     "lint": "./node_modules/.bin/eslint **/*.{js,jsx} --quiet",
     "eslint-check": "eslint --print-config . | eslint-config-prettier-check",
-    "test": "./node_modules/.bin/jest --watch",
+    "test": "jest",
     "testWithCoverage": "jest --updateSnapshot --watch --coverage && open ./coverage/lcov-report/index.html"
   },
   "dependencies": {
@@ -45,10 +45,6 @@
     "react-native-dotenv": "^0.2.0",
     "reactotron-react-native": "^2.1.7",
     "redux-devtools": "^3.5.0"
-  },
-  "jest": {
-    "preset": "jest-expo",
-    "verbose": true
   },
   "private": true
 }
