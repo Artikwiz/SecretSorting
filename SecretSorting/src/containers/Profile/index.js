@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
-import { Text, View, TouchableOpacity } from 'react-native';
-import { Icon } from 'react-native-elements';
+import { View, TouchableOpacity, Button } from 'react-native';
 import { connect } from 'react-redux';
+import { Feather } from '@expo/vector-icons';
 
 import { sessionLogOut } from 'redux/actions/session';
 
@@ -10,7 +10,7 @@ class Profile extends PureComponent {
     return {
       headerRight: (
         <TouchableOpacity onPress={() => navigation.state.params.onPressLogOut()}>
-          <Icon name="log-out" type="feather" size={20} color="black" />
+          <Feather name="log-out" size={20} color="black" style={{ paddingRight: 10 }} />
         </TouchableOpacity>
       )
     };
@@ -34,9 +34,10 @@ class Profile extends PureComponent {
   };
 
   render() {
+    const { navigation } = this.props;
     return (
       <View>
-        <Text> textInComponent </Text>
+        <Button onPress={() => navigation.navigate('ProfilePicture')} title="Take a picture" />
       </View>
     );
   }
