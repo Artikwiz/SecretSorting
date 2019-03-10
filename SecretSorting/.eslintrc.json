@@ -1,12 +1,26 @@
 {
-  "extends": ["airbnb", "prettier"],
+  "extends": ["airbnb", "prettier", "eslint:recommended"],
   "plugins": ["prettier"],
+  "env": { "node": true, "browser": true, "es6": true },
+  "parser": "babel-eslint",
   "rules": {
     "prettier/prettier": ["error"],
     "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
     "react/prefer-stateless-function": [0, { "ignorePureComponents": true }],
-    "no-use-before-define": ["error", { "functions": true, "classes": true, "variables": false }],
-    "linebreak-style": 0,
-    "generators": "never"
+    "react/prefer-es6-class": ["always"],
+    "no-console": "warn",
+    "import/no-extraneous-dependencies": [
+      "error",
+      { "devDependencies": true, "optionalDependencies": false, "peerDependencies": false }
+    ],
+    "react/prop-types": ["enabled", { "ignore": "ignore", "customValidators": "customValidator" }]
+  },
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "paths": ["src", "src/redux", "src/containers", "src/components"],
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
+      }
+    }
   }
 }

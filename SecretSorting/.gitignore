@@ -6,6 +6,5 @@ npm-debug.*
 *.key
 *.mobileprovision
 
-
 .vscode/
 .expo/
