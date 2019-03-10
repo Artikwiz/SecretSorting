@@ -6,6 +6,8 @@ import {
   SESSION_LOAD_DATA_ERROR
 } from 'actions/session';
 
+import { UPDATE_USER_PROFILE_PICTURE_SUCCEED } from 'actions/user';
+
 const defaultState = {
   user: null,
   language: '',
@@ -48,6 +50,11 @@ export default function sessionReducer(state = defaultState, action) {
       return {
         ...state,
         isLoading: false
+      };
+    case UPDATE_USER_PROFILE_PICTURE_SUCCEED:
+      return {
+        ...state,
+        user: action.user
       };
     default:
       return state;

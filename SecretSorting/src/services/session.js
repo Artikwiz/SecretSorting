@@ -16,16 +16,7 @@ const sessionLogIn = user =>
     })
     .then(response => response.user.toJSON());
 
-const onSessionLogOut = () =>
-  firebase
-    .auth()
-    .signOut()
-    .then(function() {
-      // Sign-out successful.
-    })
-    .catch(function(error) {
-      // An error happened.
-    });
+const onSessionLogOut = () => firebase.auth().signOut();
 
 const sessionRegister = user =>
   firebase

@@ -1,8 +1,9 @@
 import React, { PureComponent } from 'react';
 import { connect } from 'react-redux';
-
 import CameraController from 'components/CameraController';
 import PicturePicker from 'components/PicturePicker';
+
+import { updateUserProfilePicture } from 'actions/user';
 
 // import styles from './styles';
 
@@ -30,7 +31,9 @@ class ProfilePicture extends PureComponent {
   }
 
   handlerValidatePicture() {
-    // TODO: call firebase API pour update photo URL
+    const { photo } = this.state;
+    const { handleUpdateUserProfilePicture } = this.props;
+    handleUpdateUserProfilePicture(photo);
   }
 
   handlerDeletePicture() {
@@ -55,9 +58,9 @@ class ProfilePicture extends PureComponent {
 
 const mapDispatchToProps = dispatch => {
   return {
-    // handleLogIn: (email, password) => {
-    //   dispatch(sessionLogIn(email, password));
-    // }
+    handleUpdateUserProfilePicture: photoObj => {
+      dispatch(updateUserProfilePicture(photoObj));
+    }
   };
 };
 

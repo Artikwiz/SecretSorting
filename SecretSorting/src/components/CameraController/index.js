@@ -21,7 +21,10 @@ class CameraController extends PureComponent {
   snap = async () => {
     const { handlerTakePicture } = this.props;
     if (this.camera) {
-      const pictureObject = await this.camera.takePictureAsync();
+      const pictureObject = await this.camera.takePictureAsync({
+        base64: true,
+        allowsEditing: true
+      });
       handlerTakePicture(pictureObject);
     }
   };
