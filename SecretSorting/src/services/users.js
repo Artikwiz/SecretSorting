@@ -1,4 +1,6 @@
-import { firestore } from 'firebase';
+import firebase, { firestore } from 'firebase';
+
+import uploadProfilePicture from 'services/media';
 
 const createUser = user => {
   return new Promise(resolve => {
@@ -54,4 +56,24 @@ const addFriendsToUser = (user, friends) => {
   });
 };
 
-export { createUser, updateUser, addFriendsToUser };
+const updateUserProfilePicture = photoObj => {
+  return new Promise(resolve => {
+    require('firebase/firestore');
+    const user = firebase.auth().currentUser;
+    let result = uploadProfilePicture(photoObj.uri, user.uid).then(imageUrl => {
+      return user
+        .updateProfile({
+          photoURL: imageUrl
+        })
+        .then(() => {
+          const updateUser = firebase.auth().currentUser.toJSON();
+          return updateUser;
+        });
+    });
+    resolve(result);
+  }).catch(function(error) {
+    console.error('Error update profile picture : ', error);
+  });
+};
+
+export { createUser, updateUser, addFriendsToUser, updateUserProfilePicture };

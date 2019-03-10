@@ -19,7 +19,7 @@ import {
   onAuthStateChanged,
   onSessionLogOut
 } from 'services/session';
-import { createUser, addFriendsToUser } from 'services/users';
+import { createUser } from 'services/users';
 
 /*    Session LogIn   */
 function* fetchSessionLogin(action) {

@@ -1,35 +1,58 @@
 import React, { PureComponent } from 'react';
 import { Avatar } from 'react-native-elements';
-import { Text, View } from 'react-native';
+import { View } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import { Ionicons } from '@expo/vector-icons';
+import { connect } from 'react-redux';
+// eslint-disable-next-line import/no-extraneous-dependencies
+// import GestureHandler from 'react-native-gesture-handler';
+
 import styles from './styles';
 
 class Home extends PureComponent {
   static navigationOptions = ({ navigation }) => {
+    const photoURL = navigation.getParam('photoURL');
     return {
-      headerRight: (
+      headerRight: photoURL ? (
         <Avatar
           rounded
           size="small"
-          source={require('../../../assets/face-2.jpg')}
+          source={{ uri: photoURL }}
           containerStyle={{ marginRight: 10 }}
           onPress={() => {
             navigation.navigate('Profile');
           }}
         />
+      ) : (
+        <Avatar rounded icon={{ name: 'user', type: 'font-awesome' }} />
       )
     };
   };
 
   constructor(props) {
     super(props);
+    const { photoURL, navigation } = this.props;
+    navigation.setParams({ photoURL: photoURL });
+    this.state = {
+      photoUri: photoURL
+    };
+  }
+
+  componentDidUpdate() {
+    const { photoURL, navigation } = this.props;
+    const { photoUri } = this.state;
+    if (photoURL !== photoUri) {
+      navigation.setParams({ photoURL: photoURL });
+      // eslint-disable-next-line react/no-did-update-set-state
+      this.setState({
+        photoUri: photoURL
+      });
+    }
   }
 
   render() {
     return (
       <View style={styles.container}>
-        <Text>Open up App.js to start working on your app!</Text>
         <ActionButton buttonColor="rgba(231,76,60,1)">
           <ActionButton.Item
             buttonColor="#9b59b6"
@@ -50,4 +73,10 @@ class Home extends PureComponent {
   }
 }
 
-export default Home;
+const mapStateToProps = state => {
+  return {
+    photoURL: state.session.user.photoURL
+  };
+};
+
+export default connect(mapStateToProps)(Home);

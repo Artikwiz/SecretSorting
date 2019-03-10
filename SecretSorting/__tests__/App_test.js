@@ -1,6 +1,6 @@
-import React from 'react';
-import renderer from 'react-test-renderer';
-import App from '../App';
+// import React from 'react';
+// import renderer from 'react-test-renderer';
+// import App from '../App';
 
 // it('App renders without crashing', () => {
 //   console.log('Toto');
@@ -12,6 +12,6 @@ import App from '../App';
 //   const tree = renderer.create(<App />).toJSON();
 //   expect(tree).toMatchSnapshot();
 // });
-it('works', () => {
-  expect(1).toBe(1);
-});
+// it('works', () => {
+//   expect(1).toBe(1);
+// });
