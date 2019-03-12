@@ -24,7 +24,13 @@ class Home extends PureComponent {
           }}
         />
       ) : (
-        <Avatar rounded icon={{ name: 'user', type: 'font-awesome' }} />
+        <Avatar
+          rounded
+          icon={{ name: 'user', type: 'font-awesome' }}
+          onPress={() => {
+            navigation.navigate('Profile');
+          }}
+        />
       )
     };
   };
