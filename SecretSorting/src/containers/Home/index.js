@@ -81,7 +81,7 @@ class Home extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    photoURL: state.session.user.photoURL
+    photoURL: state.session.user ? state.session.user.photoURL : null
   };
 };
 
