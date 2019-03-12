@@ -34,7 +34,7 @@ class Login extends PureComponent {
       navigation.dispatch(
         StackActions.reset({
           index: 0,
-          actions: [NavigationActions.navigate({ routeName: 'Home' })]
+          actions: [NavigationActions.navigate({ routeName: 'HomeNavigator' })]
         })
       );
     }
