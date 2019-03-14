@@ -25,7 +25,7 @@ class AuthLoading extends PureComponent {
     }, 1500);
     handleSessionLoadData();
     if (!isLoading) {
-      const path = isLoggedIn === true ? 'HomeNavigator' : 'Login';
+      const path = isLoggedIn === true ? 'Home' : 'Login';
       navigation.dispatch(
         StackActions.reset({
           index: 0,
@@ -38,7 +38,7 @@ class AuthLoading extends PureComponent {
   componentDidUpdate() {
     const { navigation, isLoggedIn, isLoading } = this.props;
     if (!isLoading) {
-      const path = isLoggedIn === true ? 'HomeNavigator' : 'Login';
+      const path = isLoggedIn === true ? 'Home' : 'Login';
       navigation.dispatch(
         StackActions.reset({
           index: 0,
