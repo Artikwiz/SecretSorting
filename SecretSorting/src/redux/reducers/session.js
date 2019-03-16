@@ -23,7 +23,7 @@ export default function sessionReducer(state = defaultState, action) {
         ...state,
         isLoggedIn: false,
         token: '',
-        user: null,
+        user: undefined,
         error: null
       };
     case SESSION_LOGIN_SUCCEED:

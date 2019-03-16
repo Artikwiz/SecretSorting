@@ -1,5 +1,6 @@
 import firebase from 'firebase';
 
+// TODO: change uploadProfilePOicture to uploadPicture
 const uploadProfilePicture = async (uri, imageName) => {
   const blob = await new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest();

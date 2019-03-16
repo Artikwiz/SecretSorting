@@ -1,13 +1,35 @@
 import React, { PureComponent } from 'react';
 import { Avatar } from 'react-native-elements';
-import { View } from 'react-native';
+import { View, Text } from 'react-native';
 import ActionButton from 'react-native-action-button';
 import { Ionicons } from '@expo/vector-icons';
 import { connect } from 'react-redux';
 // eslint-disable-next-line import/no-extraneous-dependencies
-// import GestureHandler from 'react-native-gesture-handler';
-
+import { FlatList, RectButton } from 'react-native-gesture-handler';
+// You can import from local files
+import SwipeableSortRow from 'components/SwipeableSortRow';
 import styles from './styles';
+import DATA from '../../../data-sample/data';
+
+const Row = ({ item }) => (
+  <RectButton style={styles.rectButton} onPress={() => alert(item.from)}>
+    <Text style={styles.fromText}>{item.from}</Text>
+    <Text numberOfLines={2} style={styles.messageText}>
+      {item.message}
+    </Text>
+    <Text style={styles.dateText}>
+      {item.when} {'❭'}
+    </Text>
+  </RectButton>
+);
+
+const SwipeableRow = ({ item }) => {
+  return (
+    <SwipeableSortRow>
+      <Row item={item} />
+    </SwipeableSortRow>
+  );
+};
 
 class Home extends PureComponent {
   static navigationOptions = ({ navigation }) => {
@@ -24,7 +46,13 @@ class Home extends PureComponent {
           }}
         />
       ) : (
-        <Avatar rounded icon={{ name: 'user', type: 'font-awesome' }} />
+        <Avatar
+          rounded
+          icon={{ name: 'user', type: 'font-awesome' }}
+          onPress={() => {
+            navigation.navigate('Profile');
+          }}
+        />
       )
     };
   };
@@ -53,6 +81,12 @@ class Home extends PureComponent {
   render() {
     return (
       <View style={styles.container}>
+        <FlatList
+          data={DATA}
+          ItemSeparatorComponent={() => <View style={styles.separator} />}
+          renderItem={({ item }) => <SwipeableRow item={item} />}
+          keyExtractor={(item, index) => index.toString()}
+        />
         <ActionButton buttonColor="rgba(231,76,60,1)">
           <ActionButton.Item
             buttonColor="#9b59b6"
@@ -75,7 +109,7 @@ class Home extends PureComponent {
 
 const mapStateToProps = state => {
   return {
-    photoURL: state.session.user.photoURL
+    photoURL: state.session.user ? state.session.user.photoURL : null
   };
 };
 
